@@ -1,0 +1,5 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteRule ^(img)/.*$ - [L]
+RewriteRule !\.(dat|gif|jpg|png|ttf|eot|woff|css|js|xml|txt|doc|swf|html|ico|doc|docx|json)$ example.php

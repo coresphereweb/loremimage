@@ -1,0 +1,19 @@
+{
+	"name": "coresphere/loremimage",
+	"description": "Random image system for PHP",
+	"keywords": ["loremimage", "lorem", "loremipsum", "random image", "randomimg"],
+	"homepage": "https://github.com/coresphere/loremimage",
+	"license": ["BSD-3-Clause"],
+	"authors": [
+		{
+			"name": "Coresphere Tecnologia",
+			"homepage": "http://coresphe.re"
+		}
+	],
+	"require": {
+		"php": ">=5.2.2"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	}
+}
