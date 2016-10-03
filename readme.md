@@ -1,16 +1,16 @@
 LoremImage - Random image system for PHP
 ========================
 
-[![Downloads](https://img.shields.io/packagist/dm/dg/rss-php.svg)](https://packagist.org/packages/coresphere/loremimage)
-[![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/coresphere/loremimage/blob/master/license.md)
+[![Downloads](https://img.shields.io/packagist/dm/dg/rss-php.svg)](https://packagist.org/packages/coresphereweb/loremimage)
+[![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/coresphereweb/loremimage/blob/master/license.md)
 
 
 It requires PHP 5
 and is licensed under the New BSD License. You can obtain the latest version from
-our [GitHub repository](https://github.com/coresphere/loremimage/releases) or install it via Composer:
+our [GitHub repository](https://github.com/coresphereweb/loremimage/releases) or install it via Composer:
 
 ```
-php composer.phar require coresphere/loremimage
+php composer.phar require coresphereweb/loremimage
 ```
 
 Usage

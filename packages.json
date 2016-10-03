@@ -1,15 +1,15 @@
 {
     "packages": {
-        "name": "coresphere/loremimage",
+        "name": "coresphereweb/loremimage",
         "version": "1.0.0",
 
 		"dist": {
-			"url": "https://github.com/coresphere/loremimage",
+			"url": "https://github.com/coresphereweb/loremimage",
 			"type": "zip"
 		},
 
 		"source": {
-            "url": "https://github.com/coresphere/loremimage",
+            "url": "https://github.com/coresphereweb/loremimage",
             "type": "git",
             "reference": ""
 
