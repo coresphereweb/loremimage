@@ -15,7 +15,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"LoremImage\\": "src/"
+			"LoremImage": "lib/"
 		}
 	},
 	"minimum-stability": "dev"
