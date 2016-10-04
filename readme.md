@@ -1,7 +1,6 @@
 LoremImage - Random image system for PHP
 ========================
 
-[![Downloads](https://img.shields.io/packagist/dm/dg/rss-php.svg)](https://packagist.org/packages/coresphereweb/loremimage)
 [![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/coresphereweb/loremimage/blob/master/license.md)
 
 
@@ -10,7 +9,7 @@ and is licensed under the New BSD License. You can obtain the latest version fro
 our [GitHub repository](https://github.com/coresphereweb/loremimage/releases) or install it via Composer:
 
 ```
-php composer.phar require coresphereweb/loremimage
+composer require coresphereweb/loremimage
 ```
 
 Usage
@@ -26,10 +25,8 @@ $lorem->setPathImages(PATH . 'img/loremimage/');
 $lorem->render();
 ```
 
-Routes
+Routes (optional)
 -----
-Exemples assume http://domain.com/loremimage/
-
 1. width and height: /loremimage/600/400
 2. category: /loremimage/cars
 3. width, height and category: /loremimage/600/400/cars
@@ -39,8 +36,13 @@ Exemples assume http://domain.com/loremimage/
 
 Conditions by _GET
 -----
-_GET['qtd']
-_GET['effect']
+- (int) width
+- (int) height
+- (string) category (folder in setPathImages())
+- (int) picture
+- (string) effect
+- (int) qtd
+
 
 Effects 
 -----
