@@ -80,6 +80,9 @@ class LoremImage{
 				return $files[($_GET['picture']-1)];
 		}
 
+		if(count($files) == 0)
+			return null;
+
 		# rand
 		return $files[rand(0, (sizeof($files) -1))];
 	}
@@ -88,7 +91,12 @@ class LoremImage{
 	public function render(){
 
 		$path_image = $this->getImage();
-		//echo $path_image; exit;
+
+		if(empty($path_image)){
+			echo 'Images not found.';
+			exit;
+		}
+
 		$img = new Image($path_image);
 		$img->transparency();
 
@@ -140,12 +148,16 @@ class LoremImage{
 	                	if($category_search)
 	                    	$dirs[] = $path;
 	                }else{
-	                    $files[] = $path;
+	                	$imgsize_validator = getimagesize($path);
+	                	if(is_array( $imgsize_validator ))
+	                    	$files[] = $path;
 	                }
 	            }
 	            closedir($dh);
 	        }
 	    }
+
+
 	    return $files;
 	}
 
