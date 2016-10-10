@@ -30,17 +30,13 @@ class LoremImage{
 		
 		$rc->addDefault('api', array(
 				array(
-					0 => array("name" => "width", "type" => "int"),
-					1 => array("name" => "height", "type" => "int")
-				),
-				array(
-					0 => array("name" => "width", "type" => "int"),
-					1 => array("name" => "height", "type" => "int"),
+					0 => array("name" => "w", "type" => "int"),
+					1 => array("name" => "h", "type" => "int"),
 					2 => array("name" => "category", "type" => "text")
 				),
 				array(
-					0 => array("name" => "width", "type" => "int"),
-					1 => array("name" => "height", "type" => "int"),
+					0 => array("name" => "w", "type" => "int"),
+					1 => array("name" => "h", "type" => "int"),
 					2 => array("name" => "category", "type" => "text"),
 					3 => array("name" => "picture", "type" => "int")
 				),
@@ -56,6 +52,18 @@ class LoremImage{
 					1 => array("name" => "picture", "type" => "int")
 				)
 		));
+		$rc->add(array(
+			"controller" => "index",
+			"url" => "r",
+			"get" => array(
+				array(
+					0 => array("name" => "rt", "type" => "text"),
+					1 => array("name" => "w", "type" => "int"),
+					2 => array("name" => "h", "type" => "int")
+				)
+			)
+		));
+
 		$rc->load();
 	}
 
@@ -69,10 +77,8 @@ class LoremImage{
 		if(@$_GET['category'] != '')
 			$category = (is_dir($this->getPathImages() . $_GET['category'])) ? $_GET['category'] . '/' : '' ; 
 
-		$category_search = ($category == '') ? 1 : 0 ;
+		$category_search = (@$_GET['hierarchy'] == '0') ? 0 : 1 ;
 		$files 	  = $this->listFiles($this->getPathImages() . $category, $category_search);
-
-		//echo "<pre>"; echo print_r($_GET); exit;
 
 		# select image
 		if(is_numeric(@$_GET['picture'])){
@@ -101,8 +107,8 @@ class LoremImage{
 		$img->transparency();
 
 		# width, height
-		if(is_numeric(@$_GET['width']) && is_numeric(@$_GET['height']))
-			$img->resize($_GET['width'], $_GET['height'], 'crop');
+		if(is_numeric(@$_GET['w']) && is_numeric(@$_GET['h']))
+			$img->resize($_GET['w'], $_GET['h'], 'crop');
 
 		# effects
 		$effects = array(
