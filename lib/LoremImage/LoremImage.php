@@ -74,8 +74,10 @@ class LoremImage{
 	private function getImage(){
 
 		$category = '';
-		if(@$_GET['category'] != '')
+		if(@$_GET['category'] != ''){
+			$_GET['category'] = str_replace('-', '/', $_GET['category']);
 			$category = (is_dir($this->getPathImages() . $_GET['category'])) ? $_GET['category'] . '/' : '' ; 
+		}
 
 		$category_search = (@$_GET['hierarchy'] == '0') ? 0 : 1 ;
 		$files 	  = $this->listFiles($this->getPathImages() . $category, $category_search);
