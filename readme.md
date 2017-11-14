@@ -34,6 +34,7 @@ Conditions by _GET
 - (string) effect
 - (int) qtd
 - (bool) hierarchy - By default is active, when is false the system stop reading subcategories from category father.
+- (string) resize - crop (default), fill or proportional
 
 Effects 
 -----

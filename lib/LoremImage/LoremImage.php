@@ -8,9 +8,15 @@ class LoremImage{
 	private $path_url;
 	private $path_images;
 
+	private $folders_permission = array();
+
 	public function __construct($path_url = '/loremimage/', $path_images = ''){
 		$this->setPathUrl($path_url);
 		$this->setPathImages($path_images);
+	}
+
+	public function setFolderPermission($folder, $randomness = true){
+		array_push($this->folders_permission, $folder);
 	}
 
 	public function getPathUrl(){
@@ -48,8 +54,8 @@ class LoremImage{
 					0 => array("name" => "category", "type" => "text")
 				),
 				array(
-					0 => array("name" => "category", "type" => "text"),
-					1 => array("name" => "picture", "type" => "int")
+					0 => array("name" => "w", "type" => "int"),
+					1 => array("name" => "h", "type" => "int")
 				)
 		));
 		$rc->add(array(
@@ -65,6 +71,7 @@ class LoremImage{
 		));
 
 		$rc->load();
+
 	}
 
 	public function setPathImages($path){
@@ -80,7 +87,8 @@ class LoremImage{
 		}
 
 		$category_search = (@$_GET['hierarchy'] == '0') ? 0 : 1 ;
-		$files 	  = $this->listFiles($this->getPathImages() . $category, $category_search);
+		$permission = ($category == '') ? 1 : 0 ;
+		$files 	  = $this->listFiles($this->getPathImages() . $category, $category_search, $permission);
 
 		# select image
 		if(is_numeric(@$_GET['picture'])){
@@ -109,8 +117,10 @@ class LoremImage{
 		$img->transparency();
 
 		# width, height
-		if(is_numeric(@$_GET['w']) && is_numeric(@$_GET['h']))
-			$img->resize($_GET['w'], $_GET['h'], 'crop');
+		if(is_numeric(@$_GET['w']) && is_numeric(@$_GET['h'])){
+			$resize = (@$_GET['resize'] == 'fill' || @$_GET['resize'] == 'proportional') ? @$_GET['resize'] : 'crop' ;
+			$img->resize($_GET['w'], $_GET['h'], $resize);
+		}
 
 		# effects
 		$effects = array(
@@ -136,7 +146,7 @@ class LoremImage{
 		$img->save();
 	}
 
-	public function listFiles( $from = '.', $category_search = 1)
+	public function listFiles( $from = '.', $category_search = 1, $permission = 1)
 	{
 	    if(! is_dir($from))
 	        return false;
@@ -145,13 +155,23 @@ class LoremImage{
 	    $dirs = array($from);
 	    while( NULL !== ($dir = array_pop( $dirs)))
 	    {
+
 	        if( $dh = opendir($dir))
 	        {
 	            while( false !== ($file = readdir($dh)))
 	            {
+	            
 	                if( $file == '.' || $file == '..')
 	                    continue;
-	                $path = $dir . '/' . $file;
+
+	                $dir = (substr($dir, -1, 1) == "/") ? substr($dir, 0, -1) :  $dir ;
+	                $path = $dir. '/' . $file;
+
+
+	                if($permission == 1 && in_array($dir, $this->folders_permission)){
+	                	continue;
+	                }
+
 	                if( is_dir($path)){
 	                	if($category_search)
 	                    	$dirs[] = $path;
@@ -164,7 +184,6 @@ class LoremImage{
 	            closedir($dh);
 	        }
 	    }
-
 
 	    return $files;
 	}

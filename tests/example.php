@@ -3,9 +3,15 @@
 	require ('../lib/LoremImage/Arkantas/RouterController.php');
 	require ('../lib/LoremImage/Arkantas/Image.php');
 
-	$lorem = new \LoremImage\LoremImage('/loremimage/tests/');
-	$lorem->setPathImages('C:\Apache24\htdocs\coresphere/img/loremimage/');
-	//$lorem->setPathImages('/var/www/loremimage/img/');
+	use \LoremImage\LoremImage as LoremImage;
+
+	$lorem = new LoremImage('/loremimage/tests/');
+	
+	$lorem->setPathImages('/var/www/loremimage/img/');
+
+	$lorem->setFolderPermission("/var/www/loremimage/img/profile", false);
+	$lorem->setFolderPermission("/var/www/loremimage/img/logo", false);
+
 
 	$lorem->render(); exit;
 ?>
